@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\ConsumerData;
 use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\Cloner\Data;
+use Illuminate\Support\Str;
 
 class ConsumerDataController extends Controller
 {
@@ -30,7 +31,7 @@ class ConsumerDataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Re)
+    public function create()
     {
         return view('ConsumerData.create');
     }
@@ -43,7 +44,14 @@ class ConsumerDataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $created = ConsumerData::create([
+            'name' => Str::upper($request->name),
+            'nik' => Str::upper($request->nik),
+            'dob' => Str::upper($request->dob),
+            'marriage_status' => Str::upper($request->marriage_status),
+        ]);
+
+        return redirect()->route('rawMaterial.index');
     }
 
     /**
